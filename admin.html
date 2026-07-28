@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Portfolio Admin — Content Manager</title>
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+<style>
+  :root{
+    --bg:#080808; --panel:#101012; --panel2:#16161a; --line:#26262c;
+    --text:#f4f4f5; --muted:#9a9aa2; --accent:#FFC400; --accent2:#4dabf7;
+    --danger:#ff5d5d; --ok:#37d67a; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+  a{color:var(--accent2)}
+  h1,h2,h3,h4{margin:0 0 .4em}
+  code{background:#000;padding:2px 6px;border-radius:6px;font-size:.85em;color:var(--accent)}
+  button{font:inherit;cursor:pointer}
+  input,textarea,select{font:inherit;width:100%;background:#0c0c0e;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;outline:none}
+  input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+  textarea{min-height:78px;resize:vertical}
+  label{display:block;font-size:.78rem;color:var(--muted);margin:0 0 4px;text-transform:uppercase;letter-spacing:.04em}
+  .btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 16px;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+  .btn:hover{border-color:var(--accent)}
+  .btn--primary{background:var(--accent);color:#0a0a0a;border-color:var(--accent);font-weight:700}
+  .btn--primary:hover{filter:brightness(1.06)}
+  .btn--danger{color:var(--danger);border-color:#3a2020}
+  .btn--danger:hover{background:#2a1414;border-color:var(--danger)}
+  .btn--sm{padding:6px 10px;font-size:.85rem;border-radius:8px}
+  .muted{color:var(--muted)}
+  .pill{display:inline-block;background:#000;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.72rem;color:var(--muted)}
+
+  /* Top bar */
+  header.topbar{position:sticky;top:0;z-index:40;background:rgba(8,8,8,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .topbar .brand{font-weight:800;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+  .dot.on{background:var(--ok);box-shadow:0 0 10px var(--ok)}
+  .topbar .spacer{flex:1}
+  .status{font-size:.82rem;color:var(--muted);min-height:1.2em}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 120px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:18px}
+
+  /* Login */
+  #gate{max-width:640px;margin:6vh auto;padding:0 20px}
+  #gate .card{padding:28px}
+  ol.steps{padding-left:20px;margin:0 0 8px}
+  ol.steps li{margin:6px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+
+  /* Tabs */
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .tab{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-size:.86rem}
+  .tab.active{background:var(--accent);color:#0a0a0a;border-color:var(--accent);font-weight:700}
+  .tab .count{opacity:.7;font-size:.78em;margin-left:4px}
+
+  .section-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .section-head h2{margin:0}
+  .section-head .spacer{flex:1}
+
+  .item{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;background:var(--panel2)}
+  .item .item-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .item .item-head .idx{font-size:.75rem;color:var(--muted);font-weight:700}
+  .item .item-head .title-preview{font-weight:700}
+  .item .item-head .spacer{flex:1}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .fields .full{grid-column:1/-1}
+  @media(max-width:640px){.fields{grid-template-columns:1fr}}
+
+  .field-help{font-size:.72rem;color:var(--muted);margin-top:4px}
+  .upload-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .upload-row input[type=text]{flex:1;min-width:180px}
+  .thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:#000}
+  .badge-pending{background:#3a3410;color:var(--accent);border:1px solid #5a5020;border-radius:6px;padding:2px 8px;font-size:.7rem}
+
+  .save-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(12,12,14,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:12px 20px;display:flex;gap:12px;align-items:center}
+  .save-bar .spacer{flex:1}
+
+  .toast{position:fixed;right:20px;bottom:76px;z-index:60;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:12px 16px;max-width:360px;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;transition:.25s}
+  .toast.show{transform:none;opacity:1}
+  .toast.ok{border-left-color:var(--ok)}
+  .toast.err{border-left-color:var(--danger)}
+
+  details.config{margin-bottom:16px}
+  details.config summary{cursor:pointer;color:var(--muted);font-size:.9rem}
+  .hidden{display:none!important}
+  .note{background:#141308;border:1px solid #3a3410;border-radius:10px;padding:12px 14px;font-size:.86rem;color:#e8dca0}
+  .warn{background:#1a0f0f;border-color:#3a2020;color:#f3b6b6}
+</style>
+</head>
+<body>
+
+<!-- ===================== LOGIN GATE ===================== -->
+<div id="gate">
+  <div class="card">
+    <h1>🔐 Portfolio Admin</h1>
+    <p class="muted">Edit your portfolio content, upload images, videos, PDFs and links — changes are saved straight to GitHub and your live site updates automatically. No server needed.</p>
+
+    <div class="note" style="margin:16px 0">
+      <strong>One-time setup:</strong> create a GitHub access token so this panel can save changes for you.
+      <ol class="steps" style="margin-top:8px">
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens → Generate new token</a>.</li>
+        <li><strong>Repository access</strong> → “Only select repositories” → pick <code>desktop-tutorial</code>.</li>
+        <li><strong>Permissions → Repository permissions → Contents</strong> → set to <strong>Read and write</strong>.</li>
+        <li>Generate the token, copy it (starts with <code>github_pat_…</code>), and paste it below.</li>
+      </ol>
+    </div>
+
+    <label for="tok">GitHub access token</label>
+    <input id="tok" type="password" placeholder="github_pat_… or ghp_…" autocomplete="off" />
+    <div class="field-help">Stored only in this browser (localStorage). Never shared. Use “Log out” on a shared computer.</div>
+
+    <div style="display:flex;gap:10px;margin-top:16px;align-items:center">
+      <button class="btn btn--primary" id="loginBtn">Unlock admin</button>
+      <span class="status" id="gateStatus"></span>
+    </div>
+
+    <details class="config" style="margin-top:18px">
+      <summary>Advanced: repository settings</summary>
+      <div class="grid2" style="margin-top:12px">
+        <div><label>Owner</label><input id="cfgOwner" /></div>
+        <div><label>Repository</label><input id="cfgRepo" /></div>
+        <div><label>Branch (the one GitHub Pages serves)</label><input id="cfgBranch" /></div>
+        <div><label>Data file path</label><input id="cfgPath" /></div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <span class="brand"><span class="dot" id="connDot"></span> Portfolio Admin</span>
+    <span class="pill" id="repoPill"></span>
+    <span class="spacer"></span>
+    <span class="status" id="topStatus"></span>
+    <button class="btn btn--sm" id="reloadBtn" title="Discard local edits and reload from GitHub">↻ Reload</button>
+    <a class="btn btn--sm" id="viewSiteBtn" target="_blank" rel="noopener">View site ↗</a>
+    <button class="btn btn--sm btn--danger" id="logoutBtn">Log out</button>
+  </header>
+
+  <div class="wrap">
+    <div class="note" id="pendingNote" style="display:none"></div>
+    <div class="tabs" id="tabs"></div>
+    <div id="panel"></div>
+  </div>
+
+  <div class="save-bar">
+    <span class="status" id="saveStatus">Ready.</span>
+    <span class="spacer"></span>
+    <button class="btn btn--sm" id="downloadBtn" title="Download the JSON as a backup">⬇ Backup JSON</button>
+    <button class="btn btn--primary" id="saveBtn">💾 Save &amp; publish</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   Portfolio Admin — self-contained content manager.
+   Edits assets/data/portfolio.json + uploads media, then commits
+   everything in ONE atomic commit via the GitHub Git Data API.
+   ============================================================ */
+const LS = {
+  tok:'pf_admin_token', owner:'pf_admin_owner', repo:'pf_admin_repo',
+  branch:'pf_admin_branch', path:'pf_admin_path'
+};
+const DEFAULTS = {
+  owner:'rahuljaiswal1k-lgtm', repo:'desktop-tutorial',
+  branch:'main', path:'assets/data/portfolio.json'
+};
+
+let TOKEN='', CFG={...DEFAULTS};
+let DATA=null;            // the live content object being edited
+let PENDING={};           // path -> { base64, name } files to upload on save
+let ACTIVE='profile';
+
+/* ---------- Schema: describes every editable section ---------- */
+const IMG_FOLDER = {
+  projects:'assets/images/websites', social:'assets/images/social',
+  campaigns:'assets/images/campaigns', videos:'assets/images/videos',
+  gallery:'assets/images/gallery', events:'assets/events',
+  brands:'assets/images/brands', brochures:'assets/brochures'
+};
+const PLATFORMS=['LinkedIn','Instagram','Facebook','YouTube','Twitter/X','Behance'];
+const SOCIAL_TYPES=['Static','Carousel','Video','Reel','Story'];
+
+const SECTIONS = [
+  { key:'profile', label:'Profile', single:true, fields:[
+    {n:'name',t:'text'},
+    {n:'titles',t:'tags',help:'Rotating headline roles, comma-separated'},
+    {n:'tagline',t:'textarea',full:true},
+    {n:'email',t:'text'},{n:'phone',t:'text'},{n:'location',t:'text'},
+    {n:'socials.linkedin',t:'url',label:'LinkedIn URL'},
+    {n:'socials.instagram',t:'url',label:'Instagram URL'},
+    {n:'socials.github',t:'url',label:'GitHub URL'},
+  ]},
+  { key:'stats', label:'Stats', item:'Stat', titleField:'label', fields:[
+    {n:'value',t:'number'},{n:'suffix',t:'text',help:'e.g. + or K'},{n:'label',t:'text'},
+  ]},
+  { key:'skills', label:'Skills', item:'Skill', titleField:'name', fields:[
+    {n:'name',t:'text'},{n:'level',t:'number',help:'0–100'},{n:'desc',t:'textarea',full:true},
+  ]},
+  { key:'experience', label:'Experience', item:'Role', titleField:'role', fields:[
+    {n:'role',t:'text'},{n:'org',t:'text'},{n:'date',t:'text',help:'e.g. Present, 2024'},
+    {n:'summary',t:'textarea',full:true},{n:'tags',t:'tags',full:true},
+  ]},
+  { key:'brands', label:'Brands', item:'Brand', titleField:'name', fields:[
+    {n:'name',t:'text'},{n:'initials',t:'text',help:'2 letters shown in logo'},
+    {n:'color',t:'color'},{n:'website',t:'url'},{n:'desc',t:'textarea',full:true},
+  ]},
+  { key:'projects', label:'Projects', item:'Project', titleField:'title', fields:[
+    {n:'title',t:'text'},
+    {n:'category',t:'select',options:['website','campaign','other'],help:'“website” shows on the Websites grid'},
+    {n:'type',t:'text',help:'e.g. Website, Landing Page'},
+    {n:'client',t:'text'},{n:'year',t:'number'},{n:'role',t:'text'},
+    {n:'website',t:'url'},
+    {n:'featured',t:'checkbox'},
+    {n:'image',t:'image',full:true},
+    {n:'description',t:'textarea',full:true},
+    {n:'skills',t:'tags',full:true,help:'Shown as pills'},
+    {n:'tags',t:'tags',full:true},
+  ]},
+  { key:'social', label:'Social', item:'Post', titleField:'title', fields:[
+    {n:'title',t:'text'},
+    {n:'platform',t:'select',options:PLATFORMS},
+    {n:'type',t:'select',options:SOCIAL_TYPES},
+    {n:'campaign',t:'text'},
+    {n:'link',t:'url',help:'Link to the post'},
+    {n:'image',t:'image',full:true},
+  ]},
+  { key:'campaigns', label:'Campaigns', item:'Campaign', titleField:'title', fields:[
+    {n:'title',t:'text'},{n:'type',t:'text'},
+    {n:'image',t:'image',full:true},
+    {n:'description',t:'textarea',full:true},
+  ]},
+  { key:'videos', label:'Videos', item:'Video', titleField:'title', fields:[
+    {n:'title',t:'text'},{n:'category',t:'text'},{n:'duration',t:'text',help:'e.g. 1:24'},
+    {n:'link',t:'media',mediaKind:'video',full:true,label:'Video (paste YouTube/Vimeo link OR upload a clip)'},
+    {n:'image',t:'image',full:true,label:'Thumbnail image (optional)'},
+    {n:'description',t:'textarea',full:true},
+  ]},
+  { key:'seo', label:'SEO', item:'Focus area', titleField:'title', fields:[
+    {n:'title',t:'text'},{n:'desc',t:'textarea',full:true},
+  ]},
+  { key:'gallery', label:'Gallery', item:'Design', titleField:'title', fields:[
+    {n:'title',t:'text'},{n:'category',t:'text',help:'Used as a filter'},
+    {n:'ar',t:'text',help:'Aspect ratio, e.g. 0.7 (tall) to 2 (wide)'},
+    {n:'image',t:'image',full:true},
+  ]},
+  { key:'brochures', label:'Brochures', item:'Brochure', titleField:'title', fields:[
+    {n:'title',t:'text'},{n:'category',t:'text'},{n:'pages',t:'number'},
+    {n:'file',t:'file',accept:'application/pdf',full:true,label:'PDF file (upload or paste link)'},
+    {n:'image',t:'image',full:true,label:'Cover image (optional)'},
+  ]},
+  { key:'events', label:'Events', item:'Event', titleField:'title', fields:[
+    {n:'title',t:'text'},{n:'category',t:'text',help:'Used as a filter'},
+    {n:'ar',t:'text',help:'Aspect ratio, e.g. 1.3'},
+    {n:'image',t:'image',full:true},
+  ]},
+  { key:'testimonials', label:'Testimonials', item:'Quote', titleField:'name', fields:[
+    {n:'quote',t:'textarea',full:true},{n:'name',t:'text'},{n:'role',t:'text'},
+  ]},
+  { key:'__files', label:'Photo & Résumé', single:true, files:true },
+];
+
+/* Fixed-path uploads (Files tab) — HTML already points at these paths */
+const FIXED_FILES = [
+  {key:'photo', label:'Profile photo', path:'assets/images/rahul-jaiswal.jpg', accept:'image/*',
+   help:'Shown in the hero on the home page.'},
+  {key:'resume', label:'Résumé (PDF)', path:'assets/Rahul-Jaiswal-Resume.pdf', accept:'application/pdf',
+   help:'Downloaded from the “Download Resume” buttons.'},
+];
+
+/* ---------- Small helpers ---------- */
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const getPath=(o,p)=>p.split('.').reduce((a,k)=>a?.[k],o);
+function setPath(o,p,v){const ks=p.split('.');const last=ks.pop();let t=o;ks.forEach(k=>{t[k]=t[k]||{};t=t[k];});t[last]=v;}
+const slug=s=>String(s||'file').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40)||'file';
+function toast(msg,kind){const t=$('#toast');t.textContent=msg;t.className='toast show '+(kind||'');setTimeout(()=>t.classList.remove('show'),3200);}
+function status(el,msg){$(el).textContent=msg;}
+
+/* ---------- GitHub API ---------- */
+async function gh(path, opts={}){
+  const res=await fetch(`https://api.github.com/repos/${CFG.owner}/${CFG.repo}${path}`,{
+    ...opts,
+    headers:{
+      'Authorization':`Bearer ${TOKEN}`,
+      'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28',
+      ...(opts.headers||{})
+    }
+  });
+  if(!res.ok){
+    let detail='';try{detail=(await res.json()).message||'';}catch(e){}
+    throw new Error(`GitHub ${res.status}: ${detail||res.statusText}`);
+  }
+  return res.status===204?null:res.json();
+}
+
+async function loadFromGitHub(){
+  status('#topStatus','Loading content…');
+  const file=await gh(`/contents/${CFG.path}?ref=${CFG.branch}`);
+  const json=decodeURIComponent(escape(atob(file.content.replace(/\n/g,''))));
+  DATA=JSON.parse(json);
+  PENDING={};
+  status('#topStatus','Loaded ✓');
+  renderPendingNote();
+  renderTabs();
+  renderPanel();
+}
+
+/* Read a File -> base64 (no data-url prefix) */
+function fileToB64(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(String(r.result).split(',')[1]);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+
+/* ---------- Save: one atomic commit ---------- */
+async function save(){
+  const btn=$('#saveBtn'); btn.disabled=true;
+  try{
+    status('#saveStatus','Reading latest from GitHub…');
+    const ref=await gh(`/git/ref/heads/${CFG.branch}`);
+    const baseSha=ref.object.sha;
+    const baseCommit=await gh(`/git/commits/${baseSha}`);
+    const baseTree=baseCommit.tree.sha;
+
+    const tree=[];
+    const pendingEntries=Object.entries(PENDING);
+    let i=0;
+    for(const [path,f] of pendingEntries){
+      i++; status('#saveStatus',`Uploading file ${i}/${pendingEntries.length}: ${f.name}…`);
+      const blob=await gh('/git/blobs',{method:'POST',
+        body:JSON.stringify({content:f.base64,encoding:'base64'})});
+      tree.push({path,mode:'100644',type:'blob',sha:blob.sha});
+    }
+
+    status('#saveStatus','Writing content…');
+    tree.push({path:CFG.path,mode:'100644',type:'blob',
+      content:JSON.stringify(DATA,null,2)+'\n'});
+
+    const newTree=await gh('/git/trees',{method:'POST',
+      body:JSON.stringify({base_tree:baseTree,tree})});
+    const msg=`Update portfolio content via admin (${pendingEntries.length} file${pendingEntries.length===1?'':'s'})`;
+    const commit=await gh('/git/commits',{method:'POST',
+      body:JSON.stringify({message:msg,tree:newTree.sha,parents:[baseSha]})});
+    await gh(`/git/refs/heads/${CFG.branch}`,{method:'PATCH',
+      body:JSON.stringify({sha:commit.sha})});
+
+    PENDING={}; renderPendingNote(); renderPanel();
+    status('#saveStatus','Saved ✓ — your live site will update in ~1 minute.');
+    toast('Published! Live site updates shortly.','ok');
+  }catch(err){
+    status('#saveStatus','Save failed.');
+    toast(err.message,'err');
+    console.error(err);
+  }finally{ btn.disabled=false; }
+}
+
+/* ---------- Rendering the editor ---------- */
+function renderTabs(){
+  const tabs=$('#tabs');
+  tabs.innerHTML=SECTIONS.map(s=>{
+    const n=(!s.single&&Array.isArray(DATA?.[s.key]))?`<span class="count">${DATA[s.key].length}</span>`:'';
+    return `<button class="tab ${s.key===ACTIVE?'active':''}" data-key="${s.key}">${esc(s.label)}${n}</button>`;
+  }).join('');
+  $$('#tabs .tab').forEach(b=>b.onclick=()=>{ACTIVE=b.dataset.key;renderTabs();renderPanel();window.scrollTo(0,0);});
+}
+
+function renderPanel(){
+  const sec=SECTIONS.find(s=>s.key===ACTIVE);
+  const panel=$('#panel');
+  if(sec.files){ return renderFilesPanel(panel); }
+
+  if(sec.single){
+    panel.innerHTML=`<div class="card"><h2>${esc(sec.label)}</h2>
+      <div class="fields" id="single-fields"></div></div>`;
+    const wrap=$('#single-fields');
+    DATA[sec.key]=DATA[sec.key]||{};
+    sec.fields.forEach(f=>wrap.insertAdjacentHTML('beforeend',fieldHTML(sec.key,f,DATA[sec.key])));
+    bindFields(wrap,sec,DATA[sec.key]);
+    return;
+  }
+
+  DATA[sec.key]=DATA[sec.key]||[];
+  const list=DATA[sec.key];
+  panel.innerHTML=`
+    <div class="section-head">
+      <h2>${esc(sec.label)}</h2>
+      <span class="pill">${list.length} item${list.length===1?'':'s'}</span>
+      <span class="spacer"></span>
+      <button class="btn btn--sm btn--primary" id="addBtn">+ Add ${esc(sec.item||'item')}</button>
+    </div>
+    <div id="list"></div>`;
+  const listEl=$('#list');
+  if(!list.length) listEl.innerHTML=`<p class="muted">No items yet. Click “Add ${esc(sec.item)}”.</p>`;
+  list.forEach((obj,idx)=>listEl.insertAdjacentHTML('beforeend',itemHTML(sec,obj,idx,list.length)));
+  list.forEach((obj,idx)=>bindFields($(`#item-${idx}`),sec,obj,idx));
+
+  $('#addBtn').onclick=()=>{
+    const blank={}; sec.fields.forEach(f=>{ blank[f.n.split('.')[0]]=f.t==='checkbox'?false:(f.t==='tags'?[]:''); });
+    list.push(blank); renderTabs(); renderPanel();
+  };
+  $$('#list [data-act]').forEach(b=>{
+    b.onclick=()=>{
+      const idx=+b.dataset.idx;
+      if(b.dataset.act==='del'){ if(confirm('Delete this item?')){list.splice(idx,1);renderTabs();renderPanel();} }
+      if(b.dataset.act==='up'&&idx>0){ [list[idx-1],list[idx]]=[list[idx],list[idx-1]]; renderPanel(); }
+      if(b.dataset.act==='down'&&idx<list.length-1){ [list[idx+1],list[idx]]=[list[idx],list[idx+1]]; renderPanel(); }
+    };
+  });
+}
+
+function itemHTML(sec,obj,idx,total){
+  const title=esc(obj[sec.titleField]||`${sec.item} ${idx+1}`);
+  const fields=sec.fields.map(f=>fieldHTML(sec.key,f,obj,idx)).join('');
+  return `<div class="item" id="item-${idx}">
+    <div class="item-head">
+      <span class="idx">#${idx+1}</span>
+      <span class="title-preview" data-title>${title}</span>
+      <span class="spacer"></span>
+      <button class="btn btn--sm" data-act="up" data-idx="${idx}" ${idx===0?'disabled':''}>↑</button>
+      <button class="btn btn--sm" data-act="down" data-idx="${idx}" ${idx===total-1?'disabled':''}>↓</button>
+      <button class="btn btn--sm btn--danger" data-act="del" data-idx="${idx}">Delete</button>
+    </div>
+    <div class="fields">${fields}</div>
+  </div>`;
+}
+
+function fieldHTML(sectionKey,f,obj,idx){
+  const id=`f_${sectionKey}_${idx??'x'}_${f.n.replace(/\./g,'_')}`;
+  const val=getPath(obj,f.n);
+  const label=f.label||f.n.split('.').pop().replace(/^\w/,c=>c.toUpperCase());
+  const help=f.help?`<div class="field-help">${esc(f.help)}</div>`:'';
+  const cls=(f.full||f.t==='textarea'||f.t==='image'||f.t==='file'||f.t==='media')?'full':'';
+  let control='';
+  switch(f.t){
+    case 'textarea': control=`<textarea id="${id}" data-field="${f.n}">${esc(val)}</textarea>`; break;
+    case 'number': control=`<input id="${id}" data-field="${f.n}" type="number" value="${esc(val)}">`; break;
+    case 'url': control=`<input id="${id}" data-field="${f.n}" type="text" placeholder="https://…" value="${esc(val)}">`; break;
+    case 'color': control=`<div class="upload-row"><input id="${id}" data-field="${f.n}" type="text" value="${esc(val||'#FFC400')}"><input type="color" style="width:44px;padding:2px" value="${esc(val||'#FFC400')}" data-syncs="${id}"></div>`; break;
+    case 'checkbox': control=`<label style="display:flex;gap:8px;align-items:center;text-transform:none;color:var(--text)"><input id="${id}" data-field="${f.n}" type="checkbox" style="width:auto" ${val?'checked':''}> Featured (show first)</label>`; break;
+    case 'tags': control=`<input id="${id}" data-field="${f.n}" data-tags="1" type="text" value="${esc(Array.isArray(val)?val.join(', '):val)}" placeholder="comma, separated, values">`; break;
+    case 'select': control=`<select id="${id}" data-field="${f.n}">${(f.options||[]).map(o=>`<option ${o===val?'selected':''}>${esc(o)}</option>`).join('')}</select>`; break;
+    case 'image': control=uploadControl(id,f,val,sectionKey,'image/*'); break;
+    case 'file': control=uploadControl(id,f,val,sectionKey,f.accept||'*/*'); break;
+    case 'media': control=uploadControl(id,f,val,sectionKey,'video/*',true); break;
+    default: control=`<input id="${id}" data-field="${f.n}" type="text" value="${esc(val)}">`;
+  }
+  return `<div class="${cls}"><label for="${id}">${esc(label)}</label>${control}${help}</div>`;
+}
+
+function uploadControl(id,f,val,sectionKey,accept,isVideo){
+  const pending=val&&PENDING[val];
+  const isImg=/\.(png|jpe?g|gif|webp|svg|avif)$/i.test(val||'')||PENDING[val]?.name&&/image/.test(PENDING[val].name);
+  const thumb=(val&&isImg)?`<img class="thumb" src="${esc(pending?'':val)}" onerror="this.style.display='none'">`:'';
+  return `<div class="upload-row">
+    ${thumb}
+    <input id="${id}" data-field="${f.n}" type="text" value="${esc(val)}" placeholder="${isVideo?'https://youtube.com/…  or upload →':'assets/…/file  or upload →'}">
+    <label class="btn btn--sm" style="text-transform:none;color:var(--text);margin:0">
+      ⬆ Upload<input type="file" accept="${accept}" style="display:none" data-upload="${id}" data-section="${sectionKey}" data-fieldname="${f.n}">
+    </label>
+    ${pending?`<span class="badge-pending">will upload: ${esc(PENDING[val].name)}</span>`:''}
+  </div>`;
+}
+
+function bindFields(root,sec,obj,idx){
+  $$('[data-field]',root).forEach(inp=>{
+    const fn=inp.dataset.field;
+    const handler=()=>{
+      let v;
+      if(inp.type==='checkbox') v=inp.checked;
+      else if(inp.dataset.tags) v=inp.value.split(',').map(s=>s.trim()).filter(Boolean);
+      else if(inp.type==='number') v=inp.value===''?'':Number(inp.value);
+      else v=inp.value;
+      setPath(obj,fn,v);
+      // live title preview
+      if(sec.titleField&&fn===sec.titleField){
+        const t=$(`#item-${idx} [data-title]`); if(t) t.textContent=inp.value||`${sec.item} ${idx+1}`;
+      }
+    };
+    inp.addEventListener('input',handler);
+    inp.addEventListener('change',handler);
+  });
+  // color sync
+  $$('[data-syncs]',root).forEach(picker=>{
+    picker.addEventListener('input',()=>{const t=document.getElementById(picker.dataset.syncs);t.value=picker.value;t.dispatchEvent(new Event('input'));});
+  });
+  // uploads
+  $$('[data-upload]',root).forEach(inp=>{
+    inp.addEventListener('change',async e=>{
+      const file=e.target.files[0]; if(!file) return;
+      const section=inp.dataset.section, fieldName=inp.dataset.fieldname;
+      const folder=IMG_FOLDER[section]||'assets/uploads';
+      let base=folder;
+      // videos/brochure file uploads go to dedicated folders
+      if(fieldName==='link'&&section==='videos') base='assets/videos';
+      if(fieldName==='file'&&section==='brochures') base='assets/brochures';
+      const ext=(file.name.match(/\.[a-z0-9]+$/i)||[''])[0].toLowerCase();
+      const path=`${base}/${slug(obj[sec.titleField]||file.name.replace(ext,''))}-${Date.now().toString(36)}${ext}`;
+      status('#saveStatus',`Reading ${file.name}…`);
+      const sizeMB=file.size/1048576;
+      if(sizeMB>25){ toast(`“${file.name}” is ${sizeMB.toFixed(1)}MB. Keep uploads under ~25MB (use a YouTube link for big videos).`,'err'); e.target.value=''; return; }
+      const base64=await fileToB64(file);
+      PENDING[path]={base64,name:file.name};
+      setPath(obj,fieldName,path);
+      status('#saveStatus',`Queued ${file.name} → ${path}`);
+      renderPanel(); renderPendingNote();
+    });
+  });
+}
+
+function renderFilesPanel(panel){
+  panel.innerHTML=`<div class="card"><h2>Profile photo &amp; résumé</h2>
+    <p class="muted">These replace the fixed files used across the site. Upload, then click <strong>Save &amp; publish</strong>.</p>
+    <div id="fixed"></div></div>`;
+  const wrap=$('#fixed');
+  FIXED_FILES.forEach(ff=>{
+    const pending=PENDING[ff.path];
+    wrap.insertAdjacentHTML('beforeend',`
+      <div class="item">
+        <div class="fields"><div class="full">
+          <label>${esc(ff.label)}</label>
+          <div class="upload-row">
+            <code>${esc(ff.path)}</code>
+            <label class="btn btn--sm" style="text-transform:none;color:var(--text);margin:0">
+              ⬆ Choose file<input type="file" accept="${ff.accept}" style="display:none" data-fixed="${ff.key}">
+            </label>
+            ${pending?`<span class="badge-pending">will upload: ${esc(pending.name)}</span>`:''}
+          </div>
+          <div class="field-help">${esc(ff.help)}</div>
+        </div></div>
+      </div>`);
+  });
+  $$('[data-fixed]',wrap).forEach(inp=>{
+    inp.addEventListener('change',async e=>{
+      const file=e.target.files[0]; if(!file) return;
+      const ff=FIXED_FILES.find(x=>x.key===inp.dataset.fixed);
+      const sizeMB=file.size/1048576;
+      if(sizeMB>25){ toast(`File is ${sizeMB.toFixed(1)}MB — keep under ~25MB.`,'err'); return; }
+      const base64=await fileToB64(file);
+      PENDING[ff.path]={base64,name:file.name};
+      renderFilesPanel(panel); renderPendingNote();
+      toast('Queued. Click “Save & publish” to apply.','ok');
+    });
+  });
+}
+
+function renderPendingNote(){
+  const n=Object.keys(PENDING).length;
+  const el=$('#pendingNote');
+  if(!n){ el.style.display='none'; return; }
+  el.style.display='block';
+  el.innerHTML=`📎 <strong>${n} file${n===1?'':'s'} queued</strong> — ${Object.values(PENDING).map(f=>esc(f.name)).join(', ')}. They upload when you click <strong>Save &amp; publish</strong>.`;
+}
+
+/* ---------- Boot / auth ---------- */
+function loadCfg(){
+  CFG.owner=localStorage.getItem(LS.owner)||DEFAULTS.owner;
+  CFG.repo=localStorage.getItem(LS.repo)||DEFAULTS.repo;
+  CFG.branch=localStorage.getItem(LS.branch)||DEFAULTS.branch;
+  CFG.path=localStorage.getItem(LS.path)||DEFAULTS.path;
+  $('#cfgOwner').value=CFG.owner; $('#cfgRepo').value=CFG.repo;
+  $('#cfgBranch').value=CFG.branch; $('#cfgPath').value=CFG.path;
+}
+function saveCfg(){
+  CFG.owner=$('#cfgOwner').value.trim()||DEFAULTS.owner;
+  CFG.repo=$('#cfgRepo').value.trim()||DEFAULTS.repo;
+  CFG.branch=$('#cfgBranch').value.trim()||DEFAULTS.branch;
+  CFG.path=$('#cfgPath').value.trim()||DEFAULTS.path;
+  localStorage.setItem(LS.owner,CFG.owner);localStorage.setItem(LS.repo,CFG.repo);
+  localStorage.setItem(LS.branch,CFG.branch);localStorage.setItem(LS.path,CFG.path);
+}
+
+async function enterApp(){
+  saveCfg();
+  $('#repoPill').textContent=`${CFG.owner}/${CFG.repo} · ${CFG.branch}`;
+  $('#viewSiteBtn').href=`https://${CFG.owner}.github.io/${CFG.repo}/`;
+  $('#connDot').classList.add('on');
+  $('#gate').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  try{ await loadFromGitHub(); }
+  catch(err){ toast(err.message,'err'); status('#topStatus','Failed to load — check token & settings.'); }
+}
+
+$('#loginBtn').onclick=async()=>{
+  const t=$('#tok').value.trim();
+  if(!t){ status('#gateStatus','Please paste your token.'); return; }
+  saveCfg();
+  status('#gateStatus','Verifying token…');
+  TOKEN=t;
+  try{
+    await gh(''); // repo metadata — verifies token + access
+    localStorage.setItem(LS.tok,t);
+    await enterApp();
+  }catch(err){
+    TOKEN='';
+    status('#gateStatus',err.message.includes('404')
+      ? 'Token works but can’t see this repo — check repository access on the token.'
+      : 'Token rejected: '+err.message);
+  }
+};
+$('#tok').addEventListener('keydown',e=>{if(e.key==='Enter')$('#loginBtn').click();});
+
+$('#logoutBtn').onclick=()=>{
+  if(!confirm('Log out and forget the token on this browser?')) return;
+  localStorage.removeItem(LS.tok); TOKEN=''; location.reload();
+};
+$('#reloadBtn').onclick=async()=>{
+  if(Object.keys(PENDING).length||!confirm) {}
+  if(!confirm('Reload from GitHub? Unsaved edits will be lost.')) return;
+  try{ await loadFromGitHub(); toast('Reloaded from GitHub.','ok'); }
+  catch(err){ toast(err.message,'err'); }
+};
+$('#saveBtn').onclick=save;
+$('#downloadBtn').onclick=()=>{
+  const blob=new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio.json';a.click();
+};
+
+/* auto-login if token saved */
+(function init(){
+  loadCfg();
+  const saved=localStorage.getItem(LS.tok);
+  if(saved){ TOKEN=saved; enterApp().catch(()=>{TOKEN='';}); }
+})();
+</script>
+</body>
+</html>
