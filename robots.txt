@@ -1,0 +1,5 @@
+# robots.txt — Rahul Jaiswal Portfolio
+User-agent: *
+Allow: /
+
+Sitemap: https://rahuljaiswal1k-lgtm.github.io/desktop-tutorial/sitemap.xml
