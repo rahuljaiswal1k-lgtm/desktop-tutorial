@@ -1,0 +1,230 @@
+{
+  "profile": {
+    "name": "Rahul Jaiswal",
+    "titles": ["Marketing Manager", "Brand Strategist", "SEO Specialist", "Creative Designer", "Content Strategist"],
+    "tagline": "Building brands through creativity, strategy, design and digital marketing.",
+    "email": "envisionnexttech2@gmail.com",
+    "phone": "+91 00000 00000",
+    "location": "India",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/",
+      "instagram": "https://www.instagram.com/",
+      "github": "https://github.com/rahuljaiswal1k-lgtm"
+    }
+  },
+
+  "stats": [
+    { "value": 200, "suffix": "+", "label": "Designs" },
+    { "value": 500, "suffix": "+", "label": "Social Posts" },
+    { "value": 50,  "suffix": "+", "label": "Campaigns" },
+    { "value": 100, "suffix": "+", "label": "Videos" },
+    { "value": 20,  "suffix": "+", "label": "Brochures" }
+  ],
+
+  "skills": [
+    { "name": "Marketing", "level": 95, "desc": "Integrated marketing strategy & execution." },
+    { "name": "Branding", "level": 92, "desc": "Brand identity, positioning & voice." },
+    { "name": "SEO", "level": 90, "desc": "On-page, technical & content SEO." },
+    { "name": "Google Analytics", "level": 85, "desc": "Insights, funnels & reporting." },
+    { "name": "Graphic Design", "level": 93, "desc": "Print & digital creatives." },
+    { "name": "UI Design", "level": 82, "desc": "Interfaces & web experiences." },
+    { "name": "WordPress", "level": 88, "desc": "Sites, themes & maintenance." },
+    { "name": "HTML", "level": 90, "desc": "Semantic, accessible markup." },
+    { "name": "CSS", "level": 88, "desc": "Responsive, modern layouts." },
+    { "name": "JavaScript", "level": 78, "desc": "Interactive front-end behaviour." },
+    { "name": "Corporate Communication", "level": 90, "desc": "Internal & external messaging." },
+    { "name": "Presentation Design", "level": 89, "desc": "Decks that persuade." },
+    { "name": "Email Marketing", "level": 84, "desc": "Campaigns & automation." },
+    { "name": "Social Media", "level": 94, "desc": "Content & community growth." },
+    { "name": "CRM", "level": 80, "desc": "Pipeline & lead nurturing." },
+    { "name": "Content Marketing", "level": 91, "desc": "Story-led content that ranks." },
+    { "name": "Google Business Profile", "level": 86, "desc": "Local SEO & visibility." },
+    { "name": "Website Management", "level": 90, "desc": "Uptime, updates & growth." }
+  ],
+
+  "experience": [
+    {
+      "org": "Envision Next",
+      "role": "Marketing Manager",
+      "date": "Present",
+      "summary": "Leading brand, digital and creative for a fast-growing real estate & technology group.",
+      "tags": ["Digital Campaigns", "Website Development", "SEO", "Branding", "Social Media", "Corporate Brochures", "Lead Generation", "Analytics"]
+    },
+    {
+      "org": "RERA Easy",
+      "role": "Marketing",
+      "date": "Recent",
+      "summary": "Compliance-focused awareness marketing and knowledge-led content strategy.",
+      "tags": ["Compliance Awareness Campaigns", "Video Marketing", "Knowledge Series", "LinkedIn Strategy", "Website Management"]
+    },
+    {
+      "org": "Life at Envision Next",
+      "role": "Employee Branding",
+      "date": "Ongoing",
+      "summary": "Culture-first employer branding and creative recruitment campaigns.",
+      "tags": ["Employee Branding", "Office Culture", "Creative Campaigns", "Recruitment Branding"]
+    }
+  ],
+
+  "brands": [
+    { "name": "Envision Next", "initials": "EN", "color": "#FFC400", "desc": "Real estate & technology group — brand, marketing and web.", "website": "#" },
+    { "name": "RERA Easy", "initials": "RE", "color": "#4dabf7", "desc": "RERA compliance platform — awareness & knowledge marketing.", "website": "#" },
+    { "name": "Life at Envision Next", "initials": "LE", "color": "#ff922b", "desc": "Employer branding & culture communication.", "website": "#" },
+    { "name": "Aspace Estella", "initials": "AE", "color": "#e599f7", "desc": "Premium real estate project — launch marketing & creatives.", "website": "#" }
+  ],
+
+  "projects": [
+    {
+      "title": "RERA Easy Website",
+      "category": "website",
+      "type": "Website",
+      "description": "Corporate website with knowledge hub, blog and SEO-optimised landing pages.",
+      "image": "assets/images/websites/rera-easy.jpg",
+      "client": "RERA Easy",
+      "year": 2024,
+      "skills": ["WordPress", "SEO", "UI Design"],
+      "tags": ["Website", "SEO"],
+      "role": "Marketing & Web Management",
+      "website": "#",
+      "featured": true
+    },
+    {
+      "title": "Envision Next Website",
+      "category": "website",
+      "type": "Website",
+      "description": "Group corporate website with project showcases and lead capture.",
+      "image": "assets/images/websites/envision-next.jpg",
+      "client": "Envision Next",
+      "year": 2024,
+      "skills": ["WordPress", "HTML", "CSS"],
+      "tags": ["Website"],
+      "role": "Marketing Manager",
+      "website": "#",
+      "featured": true
+    },
+    {
+      "title": "Aspace Estella Landing Page",
+      "category": "website",
+      "type": "Landing Page",
+      "description": "High-converting project launch landing page with enquiry funnel.",
+      "image": "assets/images/websites/aspace-estella.jpg",
+      "client": "Aspace Estella",
+      "year": 2024,
+      "skills": ["HTML", "CSS", "JavaScript"],
+      "tags": ["Landing Page", "Campaign"],
+      "role": "Design & Build",
+      "website": "#",
+      "featured": true
+    },
+    {
+      "title": "SEO Knowledge Pages",
+      "category": "website",
+      "type": "SEO Pages",
+      "description": "Cluster of knowledge pages engineered to rank for compliance queries.",
+      "image": "assets/images/websites/knowledge-pages.jpg",
+      "client": "RERA Easy",
+      "year": 2024,
+      "skills": ["SEO", "Content Marketing"],
+      "tags": ["SEO Pages", "Blog"],
+      "role": "SEO Specialist",
+      "website": "#",
+      "featured": false
+    },
+    {
+      "title": "Website Wireframes & UI",
+      "category": "website",
+      "type": "Website UI",
+      "description": "Wireframes and UI kits guiding consistent web experiences.",
+      "image": "assets/images/websites/wireframes.jpg",
+      "client": "Internal",
+      "year": 2023,
+      "skills": ["UI Design"],
+      "tags": ["Wireframes", "Website UI"],
+      "role": "UI Designer",
+      "website": "#",
+      "featured": false
+    }
+  ],
+
+  "social": [
+    { "title": "RERA Knowledge Series", "platform": "LinkedIn", "campaign": "Knowledge Series", "type": "Carousel", "image": "assets/images/social/knowledge-series.jpg", "link": "#" },
+    { "title": "Great Place To Work", "platform": "LinkedIn", "campaign": "Employer Branding", "type": "Static", "image": "assets/images/social/gptw.jpg", "link": "#" },
+    { "title": "Red Bull Style Campaign", "platform": "Instagram", "campaign": "Brand Awareness", "type": "Carousel", "image": "assets/images/social/redbull.jpg", "link": "#" },
+    { "title": "Hiring — We Are Growing", "platform": "LinkedIn", "campaign": "Recruitment", "type": "Static", "image": "assets/images/social/hiring.jpg", "link": "#" },
+    { "title": "Festive Greetings", "platform": "Instagram", "campaign": "Brand", "type": "Static", "image": "assets/images/social/festive.jpg", "link": "#" },
+    { "title": "Compliance Reels", "platform": "Instagram", "campaign": "Awareness", "type": "Video", "image": "assets/images/social/reels.jpg", "link": "#" },
+    { "title": "Company Announcement", "platform": "LinkedIn", "campaign": "Announcement", "type": "Static", "image": "assets/images/social/announcement.jpg", "link": "#" },
+    { "title": "Project Launch Carousel", "platform": "Instagram", "campaign": "Campaign", "type": "Carousel", "image": "assets/images/social/launch.jpg", "link": "#" }
+  ],
+
+  "campaigns": [
+    { "title": "Red Bull Style Campaign", "type": "Brand Awareness", "description": "High-energy creative concept adapted for brand visibility.", "image": "assets/images/campaigns/redbull.jpg" },
+    { "title": "Great Place To Work", "type": "Employer Branding", "description": "Certification-led employer branding rollout.", "image": "assets/images/campaigns/gptw.jpg" },
+    { "title": "ISO Certification", "type": "Corporate", "description": "Trust-building announcement across channels.", "image": "assets/images/campaigns/iso.jpg" },
+    { "title": "Counterattack Campaign", "type": "Positioning", "description": "Competitive positioning creative series.", "image": "assets/images/campaigns/counterattack.jpg" },
+    { "title": "Knowledge Series", "type": "Content", "description": "Educational content series driving authority.", "image": "assets/images/campaigns/knowledge.jpg" },
+    { "title": "QPR Campaign", "type": "Compliance", "description": "Quarterly progress report awareness push.", "image": "assets/images/campaigns/qpr.jpg" },
+    { "title": "RERA Awareness", "type": "Awareness", "description": "Public awareness on RERA compliance.", "image": "assets/images/campaigns/rera.jpg" },
+    { "title": "Hiring Campaign", "type": "Recruitment", "description": "Talent attraction across LinkedIn & Instagram.", "image": "assets/images/campaigns/hiring.jpg" }
+  ],
+
+  "videos": [
+    { "title": "RERA Knowledge Explainer", "category": "Knowledge Series", "duration": "1:24", "description": "Explainer video simplifying compliance.", "image": "assets/images/videos/explainer.jpg", "link": "#" },
+    { "title": "Company Culture Reel", "category": "Employer Branding", "duration": "0:45", "description": "Behind-the-scenes life at Envision Next.", "image": "assets/images/videos/culture.jpg", "link": "#" },
+    { "title": "Project Walkthrough", "category": "Real Estate", "duration": "2:10", "description": "Cinematic project walkthrough.", "image": "assets/images/videos/walkthrough.jpg", "link": "#" },
+    { "title": "Awareness Reel", "category": "Campaign", "duration": "0:30", "description": "Short-form awareness reel.", "image": "assets/images/videos/awareness.jpg", "link": "#" }
+  ],
+
+  "seo": [
+    { "title": "Keyword Research", "desc": "Intent-mapped keyword clusters for real estate & compliance." },
+    { "title": "Technical SEO", "desc": "Crawlability, indexing, sitemaps and structured data." },
+    { "title": "Landing Pages", "desc": "Conversion-focused pages optimised to rank." },
+    { "title": "Google Analytics", "desc": "Goal tracking, funnels and performance reporting." },
+    { "title": "Google Search Console", "desc": "Coverage, queries and continuous optimisation." },
+    { "title": "Schema Markup", "desc": "Rich results with JSON-LD structured data." },
+    { "title": "Core Web Vitals", "desc": "Performance tuning for speed & UX signals." }
+  ],
+
+  "gallery": [
+    { "title": "Corporate Brochure", "category": "Brochures", "ar": "0.7", "image": "assets/images/gallery/brochure-1.jpg" },
+    { "title": "Service Flyer", "category": "Flyers", "ar": "0.75", "image": "assets/images/gallery/flyer-1.jpg" },
+    { "title": "Event Poster", "category": "Posters", "ar": "1.3", "image": "assets/images/gallery/poster-1.jpg" },
+    { "title": "Business Card", "category": "Business Cards", "ar": "0.62", "image": "assets/images/gallery/card-1.jpg" },
+    { "title": "Exhibition Standee", "category": "Standees", "ar": "2.2", "image": "assets/images/gallery/standee-1.jpg" },
+    { "title": "ISO Certificate", "category": "Certificates", "ar": "0.72", "image": "assets/images/gallery/certificate-1.jpg" },
+    { "title": "WhatsApp Creative", "category": "WhatsApp Creatives", "ar": "1", "image": "assets/images/gallery/whatsapp-1.jpg" },
+    { "title": "Instagram Post", "category": "Social Media", "ar": "1", "image": "assets/images/gallery/social-1.jpg" },
+    { "title": "Process Infographic", "category": "Infographics", "ar": "1.4", "image": "assets/images/gallery/infographic-1.jpg" },
+    { "title": "Company Profile", "category": "Corporate Profiles", "ar": "0.7", "image": "assets/images/gallery/profile-1.jpg" },
+    { "title": "Pitch Deck", "category": "Presentation Decks", "ar": "0.62", "image": "assets/images/gallery/deck-1.jpg" },
+    { "title": "Website Banner", "category": "Website Banners", "ar": "1.8", "image": "assets/images/gallery/banner-1.jpg" },
+    { "title": "Product Brochure", "category": "Brochures", "ar": "0.72", "image": "assets/images/gallery/brochure-2.jpg" },
+    { "title": "Recruitment Poster", "category": "Posters", "ar": "1.25", "image": "assets/images/gallery/poster-2.jpg" },
+    { "title": "Festive Creative", "category": "Social Media", "ar": "1", "image": "assets/images/gallery/social-2.jpg" }
+  ],
+
+  "brochures": [
+    { "title": "Envision Next Corporate Profile", "category": "Corporate Profile", "pages": 16, "image": "assets/brochures/corporate-profile.jpg", "file": "#" },
+    { "title": "RERA Easy Service Brochure", "category": "Service Brochure", "pages": 8, "image": "assets/brochures/service-brochure.jpg", "file": "#" },
+    { "title": "Aspace Estella Product Brochure", "category": "Product Brochure", "pages": 12, "image": "assets/brochures/product-brochure.jpg", "file": "#" },
+    { "title": "Marketing Kit 2024", "category": "Marketing Kit", "pages": 10, "image": "assets/brochures/marketing-kit.jpg", "file": "#" },
+    { "title": "Company Presentation", "category": "Company Presentation", "pages": 20, "image": "assets/brochures/company-presentation.jpg", "file": "#" }
+  ],
+
+  "events": [
+    { "title": "CREDAI Event", "category": "CREDAI Event", "ar": "1.3", "image": "assets/events/credai.jpg" },
+    { "title": "Corporate Seminar", "category": "Seminars", "ar": "0.75", "image": "assets/events/seminar.jpg" },
+    { "title": "Employee Awards", "category": "Award Functions", "ar": "1.5", "image": "assets/events/awards.jpg" },
+    { "title": "Training Session", "category": "Training Sessions", "ar": "1", "image": "assets/events/training.jpg" },
+    { "title": "Office Celebration", "category": "Office Events", "ar": "1.3", "image": "assets/events/office.jpg" },
+    { "title": "Team Offsite", "category": "Employee Events", "ar": "0.8", "image": "assets/events/offsite.jpg" },
+    { "title": "Corporate Meetup", "category": "Corporate Events", "ar": "1.4", "image": "assets/events/meetup.jpg" },
+    { "title": "Leadership Summit", "category": "Seminars", "ar": "1", "image": "assets/events/summit.jpg" }
+  ],
+
+  "testimonials": [
+    { "quote": "Rahul transformed how our brand shows up online. Strategy, design and execution — all handled with rare consistency.", "name": "Placeholder Name", "role": "Director, Envision Next" },
+    { "quote": "The knowledge series and awareness campaigns gave us a real authority edge. Numbers went up and so did trust.", "name": "Placeholder Name", "role": "Lead, RERA Easy" },
+    { "quote": "From brochures to full campaigns, the creative quality is premium. A genuine end-to-end marketing partner.", "name": "Placeholder Name", "role": "Marketing Head" }
+  ]
+}

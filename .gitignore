@@ -1,0 +1,7 @@
+# Dependencies / build artifacts (none needed — this is a static site)
+node_modules/
+package-lock.json
+*.log
+.DS_Store
+Thumbs.db
+.vscode/

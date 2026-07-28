@@ -1,0 +1,2 @@
+Replace this with your real resume as: assets/Rahul-Jaiswal-Resume.pdf
+The "Download Resume" buttons across the site point to that path.
