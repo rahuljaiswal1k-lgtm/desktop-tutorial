@@ -123,14 +123,17 @@ function renderCampaigns(list, el) {
 
 /* ---------- Video cards ---------- */
 function renderVideos(list, el) {
-  el.innerHTML = list.map((v, i) => `
-    <article class="card tilt reveal" data-delay="${i % 3}">
+  el.innerHTML = list.map((v, i) => {
+    const playable = videoSource(v.link);
+    return `
+    <article class="card tilt reveal ${playable ? "video-card" : ""}" data-delay="${i % 3}"
+      ${playable ? `data-video="${esc(v.link)}" data-video-title="${esc(v.title)}"` : ""}>
       <div class="card__media" style="background:${gradientFrom(v.title)}">
         <div class="ph">${esc(v.title)}</div>
         ${v.image ? `<img loading="lazy" decoding="async" alt="${esc(v.title)}" src="${esc(v.image)}" style="opacity:0;transition:opacity .5s" onload="this.style.opacity=1" onerror="this.remove()">` : ""}
-        <button class="play-btn" aria-label="Play ${esc(v.title)}" style="position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--accent);color:#0a0a0a;display:grid;place-items:center;box-shadow:0 10px 30px rgba(255,196,0,.4)">
+        ${playable ? `<button class="play-btn" aria-label="Play ${esc(v.title)}" style="position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--accent);color:#0a0a0a;display:grid;place-items:center;box-shadow:0 10px 30px rgba(255,196,0,.4);cursor:pointer">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </button>
+        </button>` : ""}
         <span class="doc-badge">${esc(v.duration || "")}</span>
       </div>
       <div class="card__body">
@@ -138,7 +141,52 @@ function renderVideos(list, el) {
         <div class="card__meta">${esc(v.category || "")}</div>
         <p class="card__desc">${esc(v.description || "")}</p>
       </div>
-    </article>`).join("") || emptyNote();
+    </article>`;
+  }).join("") || emptyNote();
+}
+
+/* Resolve a video link into a playable source, or null. */
+function videoSource(link) {
+  if (!link || link === "#") return null;
+  const yt = link.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+  if (yt) return { type: "embed", src: `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0` };
+  const vm = link.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vm) return { type: "embed", src: `https://player.vimeo.com/video/${vm[1]}?autoplay=1` };
+  if (/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i.test(link) || /^assets\/videos\//i.test(link))
+    return { type: "file", src: link };
+  if (/^https?:\/\//i.test(link)) return { type: "link", src: link };
+  return null;
+}
+
+/* Lightweight modal player, built once, reused. */
+function initVideoPlayer() {
+  if (document.querySelector(".vmodal")) return;
+  const box = document.createElement("div");
+  box.className = "vmodal";
+  box.innerHTML = `<div class="vmodal__inner">
+      <button class="vmodal__close" aria-label="Close">&times;</button>
+      <div class="vmodal__stage"></div>
+    </div>`;
+  document.body.appendChild(box);
+  const stage = box.querySelector(".vmodal__stage");
+  const close = () => { box.classList.remove("open"); stage.innerHTML = ""; document.body.style.overflow = ""; };
+  box.querySelector(".vmodal__close").addEventListener("click", close);
+  box.addEventListener("click", (e) => { if (e.target === box) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && box.classList.contains("open")) close(); });
+
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".video-card");
+    if (!card) return;
+    const link = card.dataset.video;
+    const src = videoSource(link);
+    if (!src) return;
+    if (src.type === "link") { window.open(src.src, "_blank", "noopener"); return; }
+    stage.innerHTML = src.type === "embed"
+      ? `<iframe src="${esc(src.src)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${esc(card.dataset.videoTitle || "Video")}"></iframe>`
+      : `<video src="${esc(src.src)}" controls autoplay playsinline></video>`;
+    box.classList.add("open");
+    document.body.style.overflow = "hidden";
+  });
 }
 
 /* ---------- SEO timeline ---------- */
@@ -339,4 +387,5 @@ export function renderAll(data) {
   initFilters();
   initGalleryTools();
   initLightbox();
+  initVideoPlayer();
 }
