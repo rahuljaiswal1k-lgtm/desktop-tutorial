@@ -13,13 +13,80 @@ function renderProfile(p) {
     const key = el.dataset.profile;
     const val = key.split(".").reduce((o, k) => o?.[k], p);
     if (val == null) return;
-    if (el.tagName === "A") el.href = val;
-    else el.textContent = val;
+    if (el.tagName === "A") {
+      if (key === "email") el.href = "mailto:" + val;
+      else if (key === "phone") el.href = "tel:" + String(val).replace(/[^+\d]/g, "");
+      else el.href = val;
+    } else el.textContent = val;
   });
   // Social links by data-social="linkedin"
   $$("[data-social]").forEach((el) => {
     const url = p.socials?.[el.dataset.social];
     if (url) el.href = url;
+  });
+}
+
+/* ---------- Page copy (headings, paragraphs, buttons, meta…) ----------
+   Any element with data-content="path.in.content" gets its text from
+   portfolio.json → content. List variants render pills / paragraphs /
+   marquee items. Missing keys leave the HTML fallback untouched.        */
+const cpath = (o, p) => p.split(".").reduce((a, k) => a?.[k], o);
+/* esc + minimal markdown: **bold** */
+const rich = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+function renderContent(content) {
+  if (!content) return;
+  $$("[data-content]").forEach((el) => {
+    const v = cpath(content, el.dataset.content);
+    if (v != null) el.textContent = v;
+  });
+  $$("[data-content-placeholder]").forEach((el) => {
+    const v = cpath(content, el.dataset.contentPlaceholder);
+    if (v != null) el.placeholder = v;
+  });
+  $$("[data-content-pills]").forEach((el) => {
+    const v = cpath(content, el.dataset.contentPills);
+    if (Array.isArray(v)) el.innerHTML = v.map((t) => `<span class="pill">${esc(t)}</span>`).join("");
+  });
+  $$("[data-content-paras]").forEach((el) => {
+    const v = cpath(content, el.dataset.contentParas);
+    if (Array.isArray(v)) el.innerHTML = v.map((t) => `<p>${rich(t)}</p>`).join("");
+  });
+  $$("[data-content-marquee]").forEach((el) => {
+    const v = cpath(content, el.dataset.contentMarquee);
+    if (Array.isArray(v) && v.length)
+      el.innerHTML = [...v, ...v].map((t) => `<span>${esc(t)}</span>`).join("");
+  });
+
+  // Per-page <title> + meta description (page key set on <body data-page>)
+  const pc = content[document.body.dataset.page];
+  if (pc?.metaTitle) {
+    document.title = pc.metaTitle;
+    $('meta[property="og:title"]')?.setAttribute("content", pc.metaTitle);
+    $('meta[name="twitter:title"]')?.setAttribute("content", pc.metaTitle);
+  }
+  if (pc?.metaDescription) {
+    $('meta[name="description"]')?.setAttribute("content", pc.metaDescription);
+    $('meta[property="og:description"]')?.setAttribute("content", pc.metaDescription);
+    $('meta[name="twitter:description"]')?.setAttribute("content", pc.metaDescription);
+  }
+}
+
+/* ---------- Filter bars built from the data itself ----------
+   <div data-filters-for="gallery"> grows one button per category found
+   in that section, so new categories added in the admin appear
+   automatically. Social filters combine platform + format.            */
+function renderFilterBars(data) {
+  $$("[data-filters-for]").forEach((bar) => {
+    const key = bar.dataset.filtersFor;
+    const list = data[key] || [];
+    const cats = key === "social"
+      ? [...new Set([...list.map((i) => i.platform), ...list.map((i) => i.type)])]
+      : [...new Set(list.map((i) => i.category))];
+    bar.innerHTML =
+      `<button class="filter-btn active" data-filter="all">All</button>` +
+      cats.filter(Boolean).map((c) =>
+        `<button class="filter-btn" data-filter="${esc(c)}">${esc(c)}</button>`).join("");
   });
 }
 
@@ -354,6 +421,8 @@ function emptyNote() {
 export function renderAll(data) {
   if (!data) return;
   renderProfile(data.profile);
+  renderContent(data.content);
+  renderFilterBars(data);
 
   const map = {
     stats: renderStats,

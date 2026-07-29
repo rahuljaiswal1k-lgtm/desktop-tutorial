@@ -37,20 +37,20 @@
   }
   </script>
 </head>
-<body>
-  <div class="loader" role="status" aria-label="Loading"><div class="loader__inner"><div class="loader__logo">Rahul Jaiswal<span class="text-accent">.</span></div><div class="loader__bar"><span></span></div><div class="loader__pct">0%</div></div></div>
+<body data-page="contact">
+  <div class="loader" role="status" aria-label="Loading"><div class="loader__inner"><div class="loader__logo"><span data-profile="name">Rahul Jaiswal</span><span class="text-accent">.</span></div><div class="loader__bar"><span></span></div><div class="loader__pct">0%</div></div></div>
   <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div><div class="scroll-progress" aria-hidden="true"></div>
 
   <header class="nav">
     <nav class="nav__inner" aria-label="Primary">
-      <a href="index.html" class="logo magnetic"><span class="logo__mark">RJ</span>Rahul Jaiswal<span class="logo__dot">.</span></a>
+      <a href="index.html" class="logo magnetic"><span class="logo__mark" data-profile="initials">RJ</span><span data-profile="name">Rahul Jaiswal</span><span class="logo__dot">.</span></a>
       <div class="nav__links">
-        <a class="nav__link" href="index.html">Home</a>
-        <a class="nav__link" href="about.html">About</a>
-        <a class="nav__link" href="projects.html">Projects</a>
-        <a class="nav__link" href="projects.html#social">Portfolio</a>
-        <a class="nav__link" href="gallery.html">Gallery</a>
-        <a class="nav__link active" href="contact.html">Contact</a>
+        <a class="nav__link" href="index.html" data-content="nav.home">Home</a>
+        <a class="nav__link" href="about.html" data-content="nav.about">About</a>
+        <a class="nav__link" href="projects.html" data-content="nav.projects">Projects</a>
+        <a class="nav__link" href="projects.html#social" data-content="nav.portfolio">Portfolio</a>
+        <a class="nav__link" href="gallery.html" data-content="nav.gallery">Gallery</a>
+        <a class="nav__link active" href="contact.html" data-content="nav.contact">Contact</a>
       </div>
       <div class="nav__right">
         <button class="theme-toggle" aria-label="Toggle light / dark theme">
@@ -62,15 +62,15 @@
     </nav>
   </header>
   <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
-    <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="projects.html#social">Portfolio</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+    <a href="index.html" data-content="nav.home">Home</a><a href="about.html" data-content="nav.about">About</a><a href="projects.html" data-content="nav.projects">Projects</a><a href="projects.html#social" data-content="nav.portfolio">Portfolio</a><a href="gallery.html" data-content="nav.gallery">Gallery</a><a href="contact.html" data-content="nav.contact">Contact</a>
   </div>
 
   <main>
     <section class="page-hero">
       <div class="container">
-        <p class="eyebrow reveal in">Contact</p>
-        <h1 class="reveal in" data-delay="1">Let's build something <span class="gradient-text">that stands out</span>.</h1>
-        <p class="section__lead reveal in" data-delay="2" style="max-width:640px">Branding, campaigns, websites or design — tell me about your project and I'll get back to you.</p>
+        <p class="eyebrow reveal in" data-content="contact.hero.eyebrow">Contact</p>
+        <h1 class="reveal in" data-delay="1"><span data-content="contact.hero.title">Let's build something</span> <span class="gradient-text" data-content="contact.hero.titleAccent">that stands out</span><span data-content="contact.hero.titleEnd">.</span></h1>
+        <p class="section__lead reveal in" data-delay="2" style="max-width:640px" data-content="contact.hero.lead">Branding, campaigns, websites or design — tell me about your project and I'll get back to you.</p>
       </div>
     </section>
 
@@ -78,56 +78,56 @@
       <div class="container contact__grid">
         <!-- Details -->
         <div class="reveal">
-          <h2 class="section__title">Get in touch</h2>
-          <p>Prefer email or social? Reach out on whichever works best for you.</p>
+          <h2 class="section__title" data-content="contact.info.title">Get in touch</h2>
+          <p data-content="contact.info.text">Prefer email or social? Reach out on whichever works best for you.</p>
           <div class="contact__list">
             <a class="contact__item" data-social="linkedin" href="#" target="_blank" rel="noopener">
               <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H20v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.1 1.43-2.1 2.9V21H9z"/></svg></span>
-              <div><small>LinkedIn</small><strong>Connect professionally</strong></div>
+              <div><small>LinkedIn</small><strong data-content="contact.items.linkedin">Connect professionally</strong></div>
             </a>
             <a class="contact__item" data-social="instagram" href="#" target="_blank" rel="noopener">
               <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
-              <div><small>Instagram</small><strong>See the creative work</strong></div>
+              <div><small>Instagram</small><strong data-content="contact.items.instagram">See the creative work</strong></div>
             </a>
             <a class="contact__item" data-profile="email" href="mailto:envisionnexttech2@gmail.com">
               <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-              <div><small>Email</small><strong>envisionnexttech2@gmail.com</strong></div>
+              <div><small>Email</small><strong data-profile="email">envisionnexttech2@gmail.com</strong></div>
             </a>
             <a class="contact__item" data-profile="phone" href="tel:+910000000000">
               <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span>
-              <div><small>Phone</small><strong>+91 00000 00000</strong></div>
+              <div><small>Phone</small><strong data-profile="phone">+91 00000 00000</strong></div>
             </a>
             <a class="contact__item" data-social="github" href="#" target="_blank" rel="noopener">
               <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg></span>
-              <div><small>GitHub</small><strong>See the code</strong></div>
+              <div><small>GitHub</small><strong data-content="contact.items.github">See the code</strong></div>
             </a>
           </div>
-          <div class="map-ph" aria-label="Map placeholder">📍 Map placeholder — embed Google Maps here</div>
+          <div class="map-ph" aria-label="Map placeholder" data-content="contact.info.mapText">📍 Map placeholder — embed Google Maps here</div>
         </div>
 
         <!-- Form -->
         <form class="form reveal" id="contact-form" data-delay="1" novalidate>
           <div class="field" data-field="name">
-            <label for="c-name">Your name</label>
-            <input id="c-name" name="name" type="text" placeholder="Jane Doe" autocomplete="name" />
+            <label for="c-name" data-content="contact.form.nameLabel">Your name</label>
+            <input id="c-name" name="name" type="text" placeholder="Jane Doe" autocomplete="name" data-content-placeholder="contact.form.namePlaceholder" />
             <span class="field__msg"></span>
           </div>
           <div class="field" data-field="email">
-            <label for="c-email">Email</label>
-            <input id="c-email" name="email" type="email" placeholder="jane@company.com" autocomplete="email" />
+            <label for="c-email" data-content="contact.form.emailLabel">Email</label>
+            <input id="c-email" name="email" type="email" placeholder="jane@company.com" autocomplete="email" data-content-placeholder="contact.form.emailPlaceholder" />
             <span class="field__msg"></span>
           </div>
           <div class="field" data-field="subject">
-            <label for="c-subject">Subject <span style="color:var(--text-faint)">(optional)</span></label>
-            <input id="c-subject" name="subject" type="text" placeholder="Project enquiry" />
+            <label for="c-subject"><span data-content="contact.form.subjectLabel">Subject</span> <span style="color:var(--text-faint)" data-content="contact.form.subjectOptional">(optional)</span></label>
+            <input id="c-subject" name="subject" type="text" placeholder="Project enquiry" data-content-placeholder="contact.form.subjectPlaceholder" />
             <span class="field__msg"></span>
           </div>
           <div class="field" data-field="message">
-            <label for="c-message">Message</label>
-            <textarea id="c-message" name="message" placeholder="Tell me about your brand or project…"></textarea>
+            <label for="c-message" data-content="contact.form.messageLabel">Message</label>
+            <textarea id="c-message" name="message" placeholder="Tell me about your brand or project…" data-content-placeholder="contact.form.messagePlaceholder"></textarea>
             <span class="field__msg"></span>
           </div>
-          <button type="submit" class="btn btn--primary magnetic">Send message <span class="btn__arrow">→</span></button>
+          <button type="submit" class="btn btn--primary magnetic"><span data-content="contact.form.button">Send message</span> <span class="btn__arrow">→</span></button>
           <p class="form__status" role="status"></p>
         </form>
       </div>
@@ -138,18 +138,18 @@
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
-          <a href="index.html" class="logo"><span class="logo__mark">RJ</span>Rahul Jaiswal<span class="logo__dot">.</span></a>
-          <p>Marketing Manager, Brand Strategist &amp; SEO Specialist. Building brands through creativity, strategy, design and digital marketing.</p>
+          <a href="index.html" class="logo"><span class="logo__mark" data-profile="initials">RJ</span><span data-profile="name">Rahul Jaiswal</span><span class="logo__dot">.</span></a>
+          <p data-content="footer.text">Marketing Manager, Brand Strategist &amp; SEO Specialist. Building brands through creativity, strategy, design and digital marketing.</p>
           <div class="footer__socials">
             <a class="social-btn" data-social="linkedin" href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21H20v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.1 1.43-2.1 2.9V21H9z"/></svg></a>
             <a class="social-btn" data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
             <a class="social-btn" data-social="github" href="#" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg></a>
           </div>
         </div>
-        <div class="footer__col"><h5>Navigate</h5><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
-        <div class="footer__col"><h5>Say hello</h5><a data-profile="email" href="mailto:envisionnexttech2@gmail.com">Email</a><a data-social="linkedin" href="#">LinkedIn</a><a data-social="instagram" href="#">Instagram</a></div>
+        <div class="footer__col"><h5 data-content="footer.navigateTitle">Navigate</h5><a href="index.html" data-content="nav.home">Home</a><a href="about.html" data-content="nav.about">About</a><a href="projects.html" data-content="nav.projects">Projects</a><a href="gallery.html" data-content="nav.gallery">Gallery</a><a href="contact.html" data-content="nav.contact">Contact</a></div>
+        <div class="footer__col"><h5 data-content="footer.sayHelloTitle">Say hello</h5><a data-profile="email" href="mailto:envisionnexttech2@gmail.com" data-content="footer.quick.email">Email</a><a data-social="linkedin" href="#" data-content="footer.quick.linkedin">LinkedIn</a><a data-social="instagram" href="#" data-content="footer.quick.instagram">Instagram</a></div>
       </div>
-      <div class="footer__bottom"><span>© <span data-year>2026</span> Rahul Jaiswal. All rights reserved.</span><span>Handcrafted with HTML, CSS &amp; JavaScript.</span></div>
+      <div class="footer__bottom"><span>© <span data-year>2026</span> <span data-content="footer.copyright">Rahul Jaiswal. All rights reserved.</span></span><span data-content="footer.credit">Handcrafted with HTML, CSS &amp; JavaScript.</span></div>
     </div>
   </footer>
 

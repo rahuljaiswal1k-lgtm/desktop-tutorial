@@ -191,6 +191,7 @@ const SOCIAL_TYPES=['Static','Carousel','Video','Reel','Story'];
 const SECTIONS = [
   { key:'profile', label:'Profile', single:true, fields:[
     {n:'name',t:'text'},
+    {n:'initials',t:'text',help:'2 letters shown in the logo mark'},
     {n:'titles',t:'tags',help:'Rotating headline roles, comma-separated'},
     {n:'tagline',t:'textarea',full:true},
     {n:'email',t:'text'},{n:'phone',t:'text'},{n:'location',t:'text'},
@@ -264,6 +265,203 @@ const SECTIONS = [
   { key:'testimonials', label:'Testimonials', item:'Quote', titleField:'name', fields:[
     {n:'quote',t:'textarea',full:true},{n:'name',t:'text'},{n:'role',t:'text'},
   ]},
+
+  /* ---- Page editors: every heading, paragraph & button on the site ---- */
+  { key:'page_home', label:'📄 Home Page', single:true, root:'content', fields:[
+    {h:'Search & sharing (SEO)'},
+    {n:'home.metaTitle',t:'text',label:'Browser-tab / Google title',full:true},
+    {n:'home.metaDescription',t:'textarea',label:'Google description',full:true},
+    {h:'Hero (top of page)'},
+    {n:'home.hero.eyebrow',t:'text',label:'Small line above headline'},
+    {n:'home.hero.typedPrefix',t:'text',label:'Typing-line prefix',help:'Shown before the rotating roles (edit roles in Profile)'},
+    {n:'home.hero.titleLine1',t:'text',label:'Headline — line 1'},
+    {n:'home.hero.titleLine2',t:'text',label:'Headline — line 2 (gold)'},
+    {n:'home.hero.ctaPortfolio',t:'text',label:'Primary button'},
+    {n:'home.hero.ctaResume',t:'text',label:'Resume button'},
+    {n:'home.hero.badge1Value',t:'text',label:'Badge 1 — number'},
+    {n:'home.hero.badge1Label',t:'text',label:'Badge 1 — label'},
+    {n:'home.hero.badge2Value',t:'text',label:'Badge 2 — number'},
+    {n:'home.hero.badge2Label',t:'text',label:'Badge 2 — label'},
+    {n:'home.hero.scrollLabel',t:'text',label:'Scroll hint'},
+    {n:'home.marquee',t:'tags',label:'Scrolling marquee words',full:true},
+    {h:'About section'},
+    {n:'home.about.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'home.about.button',t:'text',label:'Button text'},
+    {n:'home.about.title',t:'text',label:'Title — normal part'},
+    {n:'home.about.titleAccent',t:'text',label:'Title — gold part'},
+    {n:'home.about.titleEnd',t:'text',label:'Title — ending',help:'Usually just a full stop'},
+    {n:'home.about.lead',t:'textarea',label:'Lead sentence',full:true},
+    {n:'home.about.paragraphs',t:'lines',label:'Paragraphs',full:true},
+    {n:'home.about.pills',t:'tags',label:'Skill pills',full:true},
+    {h:'About mini-cards'},
+    {n:'home.aboutCards.0.title',t:'text',label:'Card 1 — title'},{n:'home.aboutCards.0.text',t:'text',label:'Card 1 — text'},
+    {n:'home.aboutCards.1.title',t:'text',label:'Card 2 — title'},{n:'home.aboutCards.1.text',t:'text',label:'Card 2 — text'},
+    {n:'home.aboutCards.2.title',t:'text',label:'Card 3 — title'},{n:'home.aboutCards.2.text',t:'text',label:'Card 3 — text'},
+    {n:'home.aboutCards.3.title',t:'text',label:'Card 4 — title'},{n:'home.aboutCards.3.text',t:'text',label:'Card 4 — text'},
+    {h:'Section headings'},
+    {n:'home.skillsHead.eyebrow',t:'text',label:'Skills — eyebrow'},
+    {n:'home.skillsHead.title',t:'text',label:'Skills — title'},
+    {n:'home.skillsHead.lead',t:'textarea',label:'Skills — lead',full:true},
+    {n:'home.experienceHead.eyebrow',t:'text',label:'Experience — eyebrow'},
+    {n:'home.experienceHead.title',t:'text',label:'Experience — title'},
+    {n:'home.brandsHead.eyebrow',t:'text',label:'Brands — eyebrow'},
+    {n:'home.brandsHead.title',t:'text',label:'Brands — title'},
+    {n:'home.brandsHead.lead',t:'textarea',label:'Brands — lead',full:true},
+    {n:'home.testimonialsHead.eyebrow',t:'text',label:'Testimonials — eyebrow'},
+    {n:'home.testimonialsHead.title',t:'text',label:'Testimonials — title'},
+    {h:'Resume banner'},
+    {n:'home.resumeCta.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'home.resumeCta.title',t:'text',label:'Title'},
+    {n:'home.resumeCta.text',t:'textarea',label:'Text',full:true},
+    {n:'home.resumeCta.button',t:'text',label:'Button'},
+    {h:'Contact banner'},
+    {n:'home.contactCta.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'home.contactCta.title',t:'text',label:'Title'},
+    {n:'home.contactCta.lead',t:'textarea',label:'Text',full:true},
+    {n:'home.contactCta.button',t:'text',label:'Button'},
+  ]},
+  { key:'page_about', label:'📄 About Page', single:true, root:'content', fields:[
+    {h:'Search & sharing (SEO)'},
+    {n:'about.metaTitle',t:'text',label:'Browser-tab / Google title',full:true},
+    {n:'about.metaDescription',t:'textarea',label:'Google description',full:true},
+    {h:'Page hero'},
+    {n:'about.hero.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'about.hero.title',t:'text',label:'Title — normal part'},
+    {n:'about.hero.titleAccent',t:'text',label:'Title — gold part'},
+    {n:'about.hero.titleEnd',t:'text',label:'Title — ending'},
+    {n:'about.hero.lead',t:'textarea',label:'Lead line',full:true},
+    {h:'Biography'},
+    {n:'about.bio.title',t:'text',label:'Heading'},
+    {n:'about.bio.lead',t:'textarea',label:'Lead sentence',full:true},
+    {n:'about.bio.paragraphs',t:'lines',label:'Paragraphs',full:true},
+    {n:'about.bio.pills',t:'tags',label:'Skill pills',full:true},
+    {h:'Mini-cards'},
+    {n:'about.cards.0.title',t:'text',label:'Card 1 — title'},{n:'about.cards.0.text',t:'text',label:'Card 1 — text'},
+    {n:'about.cards.1.title',t:'text',label:'Card 2 — title'},{n:'about.cards.1.text',t:'text',label:'Card 2 — text'},
+    {n:'about.cards.2.title',t:'text',label:'Card 3 — title'},{n:'about.cards.2.text',t:'text',label:'Card 3 — text'},
+    {n:'about.cards.3.title',t:'text',label:'Card 4 — title'},{n:'about.cards.3.text',t:'text',label:'Card 4 — text'},
+    {h:'Section headings'},
+    {n:'about.skillsHead.eyebrow',t:'text',label:'Skills — eyebrow'},
+    {n:'about.skillsHead.title',t:'text',label:'Skills — title'},
+    {n:'about.experienceHead.eyebrow',t:'text',label:'Experience — eyebrow'},
+    {n:'about.experienceHead.title',t:'text',label:'Experience — title'},
+    {h:'Resume banner'},
+    {n:'about.resumeCta.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'about.resumeCta.title',t:'text',label:'Title'},
+    {n:'about.resumeCta.text',t:'textarea',label:'Text',full:true},
+    {n:'about.resumeCta.button',t:'text',label:'Button'},
+  ]},
+  { key:'page_projects', label:'📄 Projects Page', single:true, root:'content', fields:[
+    {h:'Search & sharing (SEO)'},
+    {n:'projects.metaTitle',t:'text',label:'Browser-tab / Google title',full:true},
+    {n:'projects.metaDescription',t:'textarea',label:'Google description',full:true},
+    {h:'Page hero'},
+    {n:'projects.hero.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'projects.hero.title',t:'text',label:'Title — normal part'},
+    {n:'projects.hero.titleAccent',t:'text',label:'Title — gold part'},
+    {n:'projects.hero.titleEnd',t:'text',label:'Title — ending'},
+    {n:'projects.hero.lead',t:'textarea',label:'Lead line',full:true},
+    {h:'Section headings'},
+    {n:'projects.brandsHead.eyebrow',t:'text',label:'Brands — eyebrow'},
+    {n:'projects.brandsHead.title',t:'text',label:'Brands — title'},
+    {n:'projects.websitesHead.eyebrow',t:'text',label:'Websites — eyebrow'},
+    {n:'projects.websitesHead.title',t:'text',label:'Websites — title'},
+    {n:'projects.websitesHead.lead',t:'textarea',label:'Websites — lead',full:true},
+    {n:'projects.campaignsHead.eyebrow',t:'text',label:'Campaigns — eyebrow'},
+    {n:'projects.campaignsHead.title',t:'text',label:'Campaigns — title'},
+    {n:'projects.socialHead.eyebrow',t:'text',label:'Social — eyebrow'},
+    {n:'projects.socialHead.title',t:'text',label:'Social — title'},
+    {n:'projects.socialHead.lead',t:'textarea',label:'Social — lead',full:true},
+    {n:'projects.videosHead.eyebrow',t:'text',label:'Videos — eyebrow'},
+    {n:'projects.videosHead.title',t:'text',label:'Videos — title'},
+    {n:'projects.seoHead.eyebrow',t:'text',label:'SEO — eyebrow'},
+    {n:'projects.seoHead.title',t:'text',label:'SEO — title'},
+    {n:'projects.seoHead.lead',t:'textarea',label:'SEO — lead',full:true},
+    {h:'Bottom banner'},
+    {n:'projects.cta.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'projects.cta.title',t:'text',label:'Title'},
+    {n:'projects.cta.text',t:'textarea',label:'Text',full:true},
+    {n:'projects.cta.button',t:'text',label:'Button'},
+  ]},
+  { key:'page_gallery', label:'📄 Gallery Page', single:true, root:'content', fields:[
+    {h:'Search & sharing (SEO)'},
+    {n:'gallery.metaTitle',t:'text',label:'Browser-tab / Google title',full:true},
+    {n:'gallery.metaDescription',t:'textarea',label:'Google description',full:true},
+    {h:'Page hero'},
+    {n:'gallery.hero.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'gallery.hero.title',t:'text',label:'Title — normal part'},
+    {n:'gallery.hero.titleAccent',t:'text',label:'Title — gold part'},
+    {n:'gallery.hero.titleEnd',t:'text',label:'Title — ending'},
+    {n:'gallery.hero.lead',t:'textarea',label:'Lead line',full:true},
+    {h:'Sections'},
+    {n:'gallery.galleryHead.eyebrow',t:'text',label:'Gallery — eyebrow'},
+    {n:'gallery.galleryHead.title',t:'text',label:'Gallery — title'},
+    {n:'gallery.searchPlaceholder',t:'text',label:'Search box placeholder'},
+    {n:'gallery.brochuresHead.eyebrow',t:'text',label:'Brochures — eyebrow'},
+    {n:'gallery.brochuresHead.title',t:'text',label:'Brochures — title'},
+    {n:'gallery.brochuresHead.lead',t:'textarea',label:'Brochures — lead',full:true},
+    {n:'gallery.eventsHead.eyebrow',t:'text',label:'Events — eyebrow'},
+    {n:'gallery.eventsHead.title',t:'text',label:'Events — title'},
+  ]},
+  { key:'page_contact', label:'📄 Contact Page', single:true, root:'content', fields:[
+    {h:'Search & sharing (SEO)'},
+    {n:'contact.metaTitle',t:'text',label:'Browser-tab / Google title',full:true},
+    {n:'contact.metaDescription',t:'textarea',label:'Google description',full:true},
+    {h:'Page hero'},
+    {n:'contact.hero.eyebrow',t:'text',label:'Eyebrow'},
+    {n:'contact.hero.title',t:'text',label:'Title — normal part'},
+    {n:'contact.hero.titleAccent',t:'text',label:'Title — gold part'},
+    {n:'contact.hero.titleEnd',t:'text',label:'Title — ending'},
+    {n:'contact.hero.lead',t:'textarea',label:'Lead line',full:true},
+    {h:'Get-in-touch column'},
+    {n:'contact.info.title',t:'text',label:'Heading'},
+    {n:'contact.info.text',t:'textarea',label:'Intro text',full:true},
+    {n:'contact.items.linkedin',t:'text',label:'LinkedIn row text'},
+    {n:'contact.items.instagram',t:'text',label:'Instagram row text'},
+    {n:'contact.items.github',t:'text',label:'GitHub row text'},
+    {n:'contact.info.mapText',t:'text',label:'Map box text',full:true},
+    {h:'Form'},
+    {n:'contact.form.nameLabel',t:'text',label:'Name — label'},
+    {n:'contact.form.namePlaceholder',t:'text',label:'Name — placeholder'},
+    {n:'contact.form.emailLabel',t:'text',label:'Email — label'},
+    {n:'contact.form.emailPlaceholder',t:'text',label:'Email — placeholder'},
+    {n:'contact.form.subjectLabel',t:'text',label:'Subject — label'},
+    {n:'contact.form.subjectPlaceholder',t:'text',label:'Subject — placeholder'},
+    {n:'contact.form.subjectOptional',t:'text',label:'Subject — "(optional)" note'},
+    {n:'contact.form.messageLabel',t:'text',label:'Message — label'},
+    {n:'contact.form.messagePlaceholder',t:'text',label:'Message — placeholder'},
+    {n:'contact.form.button',t:'text',label:'Send button'},
+  ]},
+  { key:'page_footer', label:'📄 Footer & Menu', single:true, root:'content', fields:[
+    {h:'Menu labels (top navigation)'},
+    {n:'nav.home',t:'text',label:'Home'},
+    {n:'nav.about',t:'text',label:'About'},
+    {n:'nav.projects',t:'text',label:'Projects'},
+    {n:'nav.portfolio',t:'text',label:'Portfolio'},
+    {n:'nav.gallery',t:'text',label:'Gallery'},
+    {n:'nav.contact',t:'text',label:'Contact'},
+    {h:'Footer'},
+    {n:'footer.text',t:'textarea',label:'Footer description',full:true},
+    {n:'footer.navigateTitle',t:'text',label:'Column title — Navigate'},
+    {n:'footer.expertiseTitle',t:'text',label:'Column title — Expertise'},
+    {n:'footer.galleryTitle',t:'text',label:'Column title — Gallery page'},
+    {n:'footer.sayHelloTitle',t:'text',label:'Column title — Contact page'},
+    {n:'footer.copyright',t:'text',label:'Copyright line',help:'The © year is added automatically'},
+    {n:'footer.credit',t:'text',label:'Credit line'},
+    {h:'Footer quick links'},
+    {n:'footer.quick.websites',t:'text',label:'Websites'},
+    {n:'footer.quick.campaigns',t:'text',label:'Campaigns'},
+    {n:'footer.quick.graphicDesign',t:'text',label:'Graphic Design'},
+    {n:'footer.quick.brochures',t:'text',label:'Brochures'},
+    {n:'footer.quick.seo',t:'text',label:'SEO'},
+    {n:'footer.quick.videos',t:'text',label:'Videos'},
+    {n:'footer.quick.social',t:'text',label:'Social'},
+    {n:'footer.quick.events',t:'text',label:'Events'},
+    {n:'footer.quick.email',t:'text',label:'Email'},
+    {n:'footer.quick.linkedin',t:'text',label:'LinkedIn'},
+    {n:'footer.quick.instagram',t:'text',label:'Instagram'},
+  ]},
+
   { key:'__files', label:'Photo & Résumé', single:true, files:true },
 ];
 
@@ -386,9 +584,10 @@ function renderPanel(){
     panel.innerHTML=`<div class="card"><h2>${esc(sec.label)}</h2>
       <div class="fields" id="single-fields"></div></div>`;
     const wrap=$('#single-fields');
-    DATA[sec.key]=DATA[sec.key]||{};
-    sec.fields.forEach(f=>wrap.insertAdjacentHTML('beforeend',fieldHTML(sec.key,f,DATA[sec.key])));
-    bindFields(wrap,sec,DATA[sec.key]);
+    const rootKey=sec.root||sec.key;
+    DATA[rootKey]=DATA[rootKey]||{};
+    sec.fields.forEach(f=>wrap.insertAdjacentHTML('beforeend',fieldHTML(sec.key,f,DATA[rootKey])));
+    bindFields(wrap,sec,DATA[rootKey]);
     return;
   }
 
@@ -438,10 +637,12 @@ function itemHTML(sec,obj,idx,total){
 }
 
 function fieldHTML(sectionKey,f,obj,idx){
+  if(f.h) return `<div class="full" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px"><h3 style="margin:0;color:var(--accent);font-size:.95rem">${esc(f.h)}</h3></div>`;
   const id=`f_${sectionKey}_${idx??'x'}_${f.n.replace(/\./g,'_')}`;
   const val=getPath(obj,f.n);
   const label=f.label||f.n.split('.').pop().replace(/^\w/,c=>c.toUpperCase());
-  const help=f.help?`<div class="field-help">${esc(f.help)}</div>`:'';
+  const helpText=f.help||(f.t==='lines'?'One paragraph per block — leave a blank line between paragraphs. **word** shows as bold.':'');
+  const help=helpText?`<div class="field-help">${esc(helpText)}</div>`:'';
   const cls=(f.full||f.t==='textarea'||f.t==='image'||f.t==='file'||f.t==='media')?'full':'';
   let control='';
   switch(f.t){
@@ -451,6 +652,7 @@ function fieldHTML(sectionKey,f,obj,idx){
     case 'color': control=`<div class="upload-row"><input id="${id}" data-field="${f.n}" type="text" value="${esc(val||'#FFC400')}"><input type="color" style="width:44px;padding:2px" value="${esc(val||'#FFC400')}" data-syncs="${id}"></div>`; break;
     case 'checkbox': control=`<label style="display:flex;gap:8px;align-items:center;text-transform:none;color:var(--text)"><input id="${id}" data-field="${f.n}" type="checkbox" style="width:auto" ${val?'checked':''}> Featured (show first)</label>`; break;
     case 'tags': control=`<input id="${id}" data-field="${f.n}" data-tags="1" type="text" value="${esc(Array.isArray(val)?val.join(', '):val)}" placeholder="comma, separated, values">`; break;
+    case 'lines': control=`<textarea id="${id}" data-field="${f.n}" data-lines="1" style="min-height:140px">${esc(Array.isArray(val)?val.join('\n\n'):val)}</textarea>`; break;
     case 'select': control=`<select id="${id}" data-field="${f.n}">${(f.options||[]).map(o=>`<option ${o===val?'selected':''}>${esc(o)}</option>`).join('')}</select>`; break;
     case 'image': control=uploadControl(id,f,val,sectionKey,'image/*'); break;
     case 'file': control=uploadControl(id,f,val,sectionKey,f.accept||'*/*'); break;
@@ -481,6 +683,7 @@ function bindFields(root,sec,obj,idx){
       let v;
       if(inp.type==='checkbox') v=inp.checked;
       else if(inp.dataset.tags) v=inp.value.split(',').map(s=>s.trim()).filter(Boolean);
+      else if(inp.dataset.lines) v=inp.value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);
       else if(inp.type==='number') v=inp.value===''?'':Number(inp.value);
       else v=inp.value;
       setPath(obj,fn,v);
