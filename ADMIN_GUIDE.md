@@ -37,6 +37,22 @@ The panel needs permission to save changes to your repo. You do this once.
 
 - Use the **tabs** (Profile, Projects, Videos, Gallery, Brochures, …) to pick a
   section.
+
+### 📄 Page tabs — every text on the site is editable
+
+The **📄 Home Page, 📄 About Page, 📄 Projects Page, 📄 Gallery Page,
+📄 Contact Page and 📄 Footer & Menu** tabs let you edit *all* the fixed text
+on the website — headlines, section headings, buttons, badges, the scrolling
+marquee, your biography paragraphs, the contact form labels, footer text, menu
+labels, and even each page's Google title & description (SEO).
+
+- Fields are grouped with gold headings that match the sections on the page.
+- **Paragraph boxes:** write one paragraph per block and leave a **blank line**
+  between paragraphs. Wrap a word in `**double asterisks**` to make it **bold**.
+- **Filter buttons build themselves:** the filter chips on the Projects (social)
+  and Gallery (designs & events) pages are generated from the categories you
+  type on the items — add a new category to any item and its filter button
+  appears automatically.
 - Each item is a card. Change any field and it updates instantly in memory.
 - **+ Add** creates a new item · **↑ ↓** reorder · **Delete** removes one.
 - Click **💾 Save & publish** (bottom bar) to push everything live.
